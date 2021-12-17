@@ -3,12 +3,28 @@ project(List C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_library(
-    list
-    src/list.c
+set(PROJECT_VERSION 0.3.1)
+
+set(SOURCES src/list.c)
+
+add_compile_options(
+    -g
 )
 
+add_library(
+    list SHARED
+    ${SOURCES}
+)
+
+add_library(
+    listStatic STATIC
+    ${SOURCES}
+)
+
+set_target_properties(listStatic PROPERTIES OUTPUT_NAME list)
+
 add_library(List::List ALIAS list)
+add_library(List::List::Static ALIAS listStatic)
 
 target_include_directories(
     list
@@ -18,10 +34,17 @@ target_include_directories(
     #    PUBLIC include
 )
 
+target_include_directories(
+    listStatic
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>
+)
+
 include(GNUInstallDirs)
 
 install(
-    TARGETS list
+    TARGETS list listStatic
     EXPORT ListTargets
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
@@ -52,7 +75,7 @@ configure_package_config_file(
 
 write_basic_package_version_file(
     ${CMAKE_CURRENT_BINARY_DIR}/cmake/ListConfigVersion.cmake
-    VERSION 0.2.1
+    VERSION ${PROJECT_VERSION}
     COMPATIBILITY SameMajorVersion
 )
 
