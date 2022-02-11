@@ -25,3 +25,5 @@ bool list_remove_and_free(list* l, uint64_t index);
 uint64_t list_find(list* l, void* val);
 
 void list_foreach(list* l, void (*func)(void* n));
+
+char* list_version_string();

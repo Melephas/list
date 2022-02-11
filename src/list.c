@@ -2,7 +2,9 @@
 #include <stdbool.h>
 
 
-#include "list.h"
+#include "list/list.h"
+
+#include "config.h"
 
 
 struct list_s {
@@ -214,3 +216,8 @@ void list_foreach(list* l, void (*func)(void* value)) {
         current = current->next;
     }
 }
+
+char* list_version_string() {
+    return PACKAGE_STRING;
+}
+
