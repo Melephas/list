@@ -3,7 +3,7 @@ TEST_LOG_DRIVER = env AM_TAP_AWK='$(AWK)' $(SHELL) \
 
 AM_TESTS_ENVIRONMENT = CRITERION_OUTPUTS='tap:-'; \
                        export CRITERION_OUTPUTS; \
-                       CRITERION_VERBOSITY_LEVEL=1; \
+                       CRITERION_VERBOSITY_LEVEL=2; \
                        export CRITERION_VERBOSITY_LEVEL;
 
 check_PROGRAMS = basic_tests

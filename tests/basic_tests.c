@@ -12,6 +12,7 @@ void setup() {
 
 void teardown() {
     list_destroy(test_list);
+    cr_expect(test_list == NULL);
 }
 
 TestSuite(basic, .init = setup, .fini = teardown);
@@ -24,8 +25,3 @@ Test(basic, allocation) {
     cr_expect(ne(ptr, test_list, NULL), "Memory allocation in 'list_new()' failed.");
 }
 
-Test(basic, deallocation) {
-    list_destroy(test_list);
-    cr_expect(eq(ptr, test_list, NULL), "Pointer cleanup in 'list_destroy()' failed.");
-    test_list = list_new();
-}
