@@ -23,7 +23,7 @@ LINK_FLAGS = -shared
 
 # Additional programs needed for various steps
 INSTALL = install
-INSTALL_FLAGS = 
+INSTALL_FLAGS = -vC
 
 ########################################
 # === End of configuration section === #
@@ -55,10 +55,12 @@ clean:
 .PHONY: install
 install: $(LIBRARY)
 	$(INSTALL) $(INSTALL_FLAGS) $(LIBRARY) $(INSTALL_DIR)
-	$(INSTALL) $(INSTALL_FLAGS) $(HEADERS) $(HEADER_DIR)
+	$(INSTALL) $(INSTALL_FLAGS) -m644 $(HEADERS) $(HEADER_DIR)
+	ldconfig
 
 .PHONY: uninstall
 uninstall:
 	$(RM) $(INSTALL_DIR)/$(LIBRARY)
 	$(RM) $(INSTALL_HEADERS)
+	ldconfig
 
